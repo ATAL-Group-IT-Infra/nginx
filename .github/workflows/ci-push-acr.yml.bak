@@ -20,7 +20,7 @@ jobs:
           echo ${{ secrets.ACR_PASSWORD }} | docker login ${{ secrets.ACR_LOGIN_SERVER }} -u ${{ secrets.ACR_USERNAME }} --password-stdin
 
       - name: Pull Official Nginx Image
-        run: docker pull nginx:latest
+        run: docker pull nginx:stable-alpine3.20-perl
 
       - name: Tag Image for ACR
         run: |

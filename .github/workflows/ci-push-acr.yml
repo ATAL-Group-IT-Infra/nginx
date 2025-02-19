@@ -24,8 +24,8 @@ jobs:
 
       - name: Tag Image for ACR
         run: |
-          docker tag nginx:latest ${{ secrets.ACR_LOGIN_SERVER }}/nginx:latest
-          docker tag nginx:latest ${{ secrets.ACR_LOGIN_SERVER }}/nginx:${{ github.sha }}
+          docker tag nginx:stable-alpine3.20-perl ${{ secrets.ACR_LOGIN_SERVER }}/nginx:latest
+          docker tag nginx:stable-alpine3.20-perl ${{ secrets.ACR_LOGIN_SERVER }}/nginx:${{ github.sha }}
 
       - name: Push Image to ACR
         run: |
