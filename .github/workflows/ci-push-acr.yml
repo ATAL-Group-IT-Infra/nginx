@@ -37,5 +37,4 @@ jobs:
           az containerapp update \
             --name ${{ secrets.CONTAINER_APP_NAME }} \
             --resource-group ${{ secrets.RESOURCE_GROUP }} \
-            --subscription ${{ secrets.SUBSCRIPTION_ID }} \
             --image ${{ secrets.ACR_NAME }}.azurecr.io/nginx-custom:latest
