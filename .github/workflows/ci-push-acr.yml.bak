@@ -42,13 +42,13 @@ jobs:
             # --resource-group ${{ secrets.RESOURCE_GROUP }} \
             # --image ${{ secrets.ACR_NAME }}.azurecr.io/nginx:latest
             
-      # deploy to azure container apps
-      - name: Deploy to Azure Container Apps
-        run: |
-          az containerapp update \
-            --name ${{ secrets.CONTAINER_APP_NAME }} \
-            --resource-group ${{ secrets.RESOURCE_GROUP }} \
-            --image ${{ secrets.ACR_NAME }}.azurecr.io/nginx:latest
-            --registry-server ${{ secrets.ACR_NAME }}.azurecr.io \
-            --registry-username ${{ secrets.ACR_PROD_CLIENT_ID }} \
-            --registry-password ${{ secrets.ACR_PROD_CLIENT_SECRET }}
+      # # deploy to azure container apps
+      # - name: Deploy to Azure Container Apps
+        # run: |
+          # az containerapp update \
+            # --name ${{ secrets.CONTAINER_APP_NAME }} \
+            # --resource-group ${{ secrets.RESOURCE_GROUP }} \
+            # --image ${{ secrets.ACR_NAME }}.azurecr.io/nginx:latest
+            # --registry-server ${{ secrets.ACR_NAME }}.azurecr.io \
+            # --registry-username ${{ secrets.ACR_PROD_CLIENT_ID }} \
+            # --registry-password ${{ secrets.ACR_PROD_CLIENT_SECRET }}
