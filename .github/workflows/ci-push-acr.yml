@@ -3,34 +3,45 @@ name: Build and Push Nginx to ACR
 on:
   push:
     branches:
-      - main  # Runs the workflow when pushing to main branch
+      - main  # Runs when changes are pushed to main
 
 jobs:
-
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
 
-      - uses: azure/login@v2
+      # Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Log in to Azure
+      - name: Azure Login
+        uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Login to Azure Container Registry
+      # Log in to Azure Container Registry
+      - name: Log in to ACR
+        run: az acr login --name ${{ secrets.ACR_NAME }}
+
+      # Build and Push Docker Image to ACR
+      - name: Build and Push Docker Image
         run: |
-          echo ${{ secrets.ACR_PASSWORD }} | docker login ${{ secrets.ACR_LOGIN_SERVER }} -u ${{ secrets.ACR_USERNAME }} --password-stdin
+          IMAGE_NAME=${{ secrets.ACR_NAME }}.azurecr.io/nginx-custom:latest
+          docker build -t $IMAGE_NAME .
+          docker push $IMAGE_NAME
 
-      - name: Pull Official Nginx Image
-        run: docker pull nginx:stable-alpine3.20-perl
-
-      - name: Tag Image for ACR
+      # Deploy to Azure Container Apps
+      - name: Deploy to Azure Container Apps
         run: |
-          docker tag nginx:stable-alpine3.20-perl ${{ secrets.ACR_LOGIN_SERVER }}/nginx:latest
-          docker tag nginx:stable-alpine3.20-perl ${{ secrets.ACR_LOGIN_SERVER }}/nginx:${{ github.sha }}
+          az containerapp update \
+            --name ${{ secrets.CONTAINER_APP_NAME }} \
+            --resource-group ${{ secrets.RESOURCE_GROUP }} \
+            --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }} \
+            --image ${{ secrets.ACR_NAME }}.azurecr.io/nginx-custom:latest
 
-      - name: Push Image to ACR
+      - name: Restart Azure Container App
         run: |
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/nginx:latest
-          docker push ${{ secrets.ACR_LOGIN_SERVER }}/nginx:${{ github.sha }}
-
-      - name: Logout from Docker
-        run: docker logout ${{ secrets.ACR_LOGIN_SERVER }}
+          az containerapp restart \
+            --name ${{ secrets.CONTAINER_APP_NAME }} \
+            --resource-group ${{ secrets.RESOURCE_GROUP }}
