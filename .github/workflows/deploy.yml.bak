@@ -33,6 +33,6 @@ jobs:
             --name ${{ secrets.CONTAINER_APP_NAME }} \
             --resource-group ${{ secrets.RESOURCE_GROUP }} \
             --image $IMAGE_NAME \
-            --registry-server ${{ secrets.ACR_NAME }}.azurecr.io \
+            --registry-server ${{ secrets.ACR_PROD_NAME }}.azurecr.io \
             --registry-username ${{ secrets.ACR_CLIENT_ID }} \
             --registry-password ${{ secrets.ACR_CLIENT_SECRET }}
