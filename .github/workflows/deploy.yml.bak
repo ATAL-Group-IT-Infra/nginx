@@ -23,7 +23,7 @@ jobs:
           az containerapp update \
             --name ${{ secrets.CONTAINER_APP_NAME }} \
             --resource-group ${{ secrets.RESOURCE_GROUP }} \
-            --image $IMAGE_NAME \
+            --image ${{ secrets.ACR_PROD_NAME }}.azurecr.io/nginx:latest \
             --registry-server ${{ secrets.ACR_PROD_NAME }}.azurecr.io \
             --registry-username ${{ secrets.ACR_PROD_CLIENT_ID }} \
             --registry-password ${{ secrets.ACR_PROD_CLIENT_SECRET }}
