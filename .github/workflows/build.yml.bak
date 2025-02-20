@@ -44,7 +44,7 @@ jobs:
             # --image ${{ secrets.ACR_NAME }}.azurecr.io/nginx:latest
             
       - name: Upload Image Name Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: image-info
           path: image-info.txt
