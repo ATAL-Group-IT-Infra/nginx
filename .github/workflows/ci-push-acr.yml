@@ -27,7 +27,7 @@ jobs:
       # Build and Push Docker Image to ACR
       - name: Build and Push Docker Image
         run: |
-          IMAGE_NAME=${{ secrets.ACR_NAME }}.azurecr.io/nginx-custom:latest
+          IMAGE_NAME=${{ secrets.ACR_NAME }}.azurecr.io/nginx:latest
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
