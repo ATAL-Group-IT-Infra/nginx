@@ -31,17 +31,11 @@ jobs:
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
-      # Deploy to Azure Container Apps
-      - name: Deploy to Azure Container Apps
-        run: |
-          az containerapp update \
-            --name ${{ secrets.CONTAINER_APP_NAME }} \
-            --resource-group ${{ secrets.RESOURCE_GROUP }} \
-            --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }} \
-            --image ${{ secrets.ACR_NAME }}.azurecr.io/nginx-custom:latest
-
-      - name: Restart Azure Container App
-        run: |
-          az containerapp restart \
-            --name ${{ secrets.CONTAINER_APP_NAME }} \
-            --resource-group ${{ secrets.RESOURCE_GROUP }}
+      # # Deploy to Azure Container Apps
+      # - name: Deploy to Azure Container Apps
+        # run: |
+          # az containerapp update \
+            # --name ${{ secrets.CONTAINER_APP_NAME }} \
+            # --resource-group ${{ secrets.RESOURCE_GROUP }} \
+            # --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }} \
+            # --image ${{ secrets.ACR_NAME }}.azurecr.io/nginx-custom:latest
