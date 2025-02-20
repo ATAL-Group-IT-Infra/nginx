@@ -48,4 +48,3 @@ jobs:
         with:
           name: image-info
           path: image-info.txt
-        run: echo $IMAGE_NAME > image-info.txt
