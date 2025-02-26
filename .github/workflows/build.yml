@@ -31,5 +31,5 @@ jobs:
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
         
-      - name: Log out of Dev Tenant
+      - name: Log out of Prod Tenant
         run: az logout

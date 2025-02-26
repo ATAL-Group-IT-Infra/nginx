@@ -10,7 +10,7 @@
     </style>
 </head>
 <body>
-    <h1>🚀 Welcome to My Custom Nginx Page! V2🚀</h1>
+    <h1>🚀 Welcome to My Custom Nginx Page! Pull from Prod ACR🚀</h1>
     <p>This page is served from a custom Nginx container.</p>
 </body>
 </html>
