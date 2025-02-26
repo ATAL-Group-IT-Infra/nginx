@@ -21,8 +21,8 @@ jobs:
       - name: Set ACR Authentication
         run: |
           az containerapp registry set \
-            --name ${{ secrets.CONTAINER_APP_NAME }} \
-            --resource-group ${{ secrets.RESOURCE_GROUP }} \
+            --name ${{ secrets.PROD_CONTAINER_APP_NAME }} \
+            --resource-group ${{ secrets.PROD_RESOURCE_GROUP }} \
             --server ${{ secrets.ACR_PROD_NAME }}.azurecr.io \
             --username ${{ secrets.ACR_PROD_CLIENT_ID }} \
             --password ${{ secrets.ACR_PROD_CLIENT_SECRET }}

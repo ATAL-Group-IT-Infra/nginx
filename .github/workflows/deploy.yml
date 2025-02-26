@@ -16,7 +16,7 @@ jobs:
       - name: Azure Login (Dev Tenant - Container App)
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_PROD_CREDENTIALS }}
 
       - name: Set ACR Authentication
         run: |
